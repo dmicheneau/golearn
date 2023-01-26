@@ -1,4 +1,4 @@
-module golearn
+module github.com/dmicheneau/golearn
 
 go 1.19
 

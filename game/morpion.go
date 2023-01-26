@@ -1,4 +1,4 @@
-package main
+package morpion
 
 import (
 	"bufio"
@@ -53,6 +53,26 @@ type Player struct {
 	Num  int
 }
 
+// Start is the function that will start the game
+func Start() {
+	player1 = setPlayer(number)
+	number++
+	player2 = setPlayer(number)
+	printGridV2()
+	for {
+		playerTour(player1)
+		if checkWin() {
+			fmt.Printf(style.Render("Player %s win the game !!"), player1.Name)
+			break
+		}
+		playerTour(player2)
+		if checkWin() {
+			fmt.Printf(style.Render("Player %s win the game !!"), player2.Name)
+			break
+		}
+	}
+}
+
 // setPlayer is the function that will set the name, sigle and number of the player
 func setPlayer(number int) Player {
 	buf := bufio.NewReader(os.Stdin)
@@ -64,7 +84,7 @@ func setPlayer(number int) Player {
 }
 
 // printGridV2 is the function that will print the grid with color
-func printGridV2(grid [9]string) {
+func printGridV2() {
 	for i := 0; i < 9; i++ {
 		if grid[i] == sigle[0] || grid[i] == sigle[1] {
 			fmt.Printf(char.Render("%s"), grid[i])
@@ -114,10 +134,11 @@ func playerTour(p Player) {
 		i = readEntry(*buf) - 1
 	}
 	grid[i] = p.Sigl
-	printGridV2(grid)
+	printGridV2()
 }
 
-func checkWin(g [9]string) bool {
+func checkWin() bool {
+	g := grid
 	if g[0] == g[1] && g[1] == g[2] {
 		return true
 	}
@@ -143,27 +164,4 @@ func checkWin(g [9]string) bool {
 		return true
 	}
 	return false
-}
-
-// main is the main function
-func main() {
-	player1 := setPlayer(1)
-	player2 := setPlayer(2)
-	printGridV2(grid)
-	for i := 0; i < 5; i++ {
-		playerTour(player1)
-		if checkWin(grid) {
-			fmt.Printf(style.Render("player %s win !!!"), player1.Name)
-			break
-		}
-		if i == 4 {
-			fmt.Println(style.Render("draw match !!!"))
-			break
-		}
-		playerTour(player2)
-		if checkWin(grid) {
-			fmt.Printf(style.Render("player %s win !!!"), player2.Name)
-			break
-		}
-	}
 }
