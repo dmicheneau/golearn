@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"os"
 	"strconv"
 	"strings"
@@ -10,12 +11,26 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
+const (
+	sigle1 string = "O"
+	sigle2 string = "X"
+	grid1  string = "1"
+	grid2  string = "2"
+	grid3  string = "3"
+	grid4  string = "4"
+	grid5  string = "5"
+	grid6  string = "6"
+	grid7  string = "7"
+	grid8  string = "8"
+	grid9  string = "9"
+)
+
 var (
 	number  int = 1
 	player1 Player
 	player2 Player
-	grid    = [9]string{"1", "2", "3", "4", "5", "6", "7", "8", "9"}
-	sigle   = [2]string{"O", "X"}
+	grid    = [9]string{grid1, grid2, grid3, grid4, grid5, grid6, grid7, grid8, grid9}
+	sigle   = [2]string{sigle1, sigle2}
 	reponse string
 	style   = lipgloss.NewStyle().
 		Bold(true).
@@ -62,24 +77,26 @@ func printGridV2(grid [9]string) {
 	}
 }
 
-// printGrid is the function that will print the grid
-func printGrid(grid [9]string) {
-	fmt.Println(grid[:3])
-	fmt.Println(grid[3:6])
-	fmt.Println(grid[6:])
-}
-
-func readEntry(b bufio.Reader) int {
-	reponse, _ = b.ReadString('\n')
-	reponse = strings.TrimSuffix(reponse, "\n")
-	i, _ := strconv.Atoi(reponse)
+// readEntry is the function that will read the entry of the player
+func readEntry(s bufio.Scanner) int {
+	for s.Scan() {
+		reponse = s.Text()
+		if s.Err() != nil {
+			log.Println(s.Err())
+		}
+		break
+	}
+	i, err := strconv.Atoi(reponse)
+	if err != nil {
+		log.Println(err, reponse)
+	}
 	return i
 }
 
 // playerTour is the function that will be called for each player
 func playerTour(p Player) {
 	var i int
-	buf := bufio.NewReader(os.Stdin)
+	buf := bufio.NewScanner(os.Stdin)
 	fmt.Printf(style.Render("Player %s (sigle %s) please enter a number"), p.Name, p.Sigl)
 	for {
 		i = readEntry(*buf)
@@ -88,7 +105,7 @@ func playerTour(p Player) {
 		}
 		fmt.Println(style.Render("please enter a number between 1 and 9"))
 	}
-	i = i - 1
+	i--
 	for {
 		if grid[i] != sigle[0] && grid[i] != sigle[1] {
 			break
