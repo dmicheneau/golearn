@@ -137,6 +137,7 @@ func playerTour(p Player) {
 	printGridV2()
 }
 
+// checkWin is the function that will check if a player win
 func checkWin() bool {
 	g := grid
 	if g[0] == g[1] && g[1] == g[2] {

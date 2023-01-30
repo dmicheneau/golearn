@@ -4,7 +4,8 @@ import (
 	"fmt"
 
 	"github.com/charmbracelet/lipgloss"
-	morpion "github.com/dmicheneau/golearn/game"
+	fibonacci "github.com/dmicheneau/golearn/fibonacci"
+	morpion "github.com/dmicheneau/golearn/morpion"
 )
 
 var (
@@ -28,13 +29,20 @@ func main() {
 	for {
 		fmt.Println(style.Render("welcome to game"))
 		fmt.Println(style.Render("1 - play morpion"))
-		fmt.Println(style.Render("2 - quit"))
+		fmt.Println(style.Render("2 - play fibonacci"))
+		fmt.Println(style.Render("3 - quit"))
 		fmt.Println(style.Render("what do you want to do ?"))
 		var reponse string
 		fmt.Scanln(&reponse)
-		if reponse == "1" {
+		switch reponse {
+		case "1":
 			morpion.Start()
-		} else if reponse == "2" {
+		case "2":
+			fibonacci.Start()
+		case "3":
+			os.Exit(0)
+		default:
+			fmt.Println(style.Render("please enter a valid number"))
 			break
 		}
 	}
