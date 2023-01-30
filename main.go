@@ -5,8 +5,8 @@ import (
 	"os"
 
 	"github.com/charmbracelet/lipgloss"
-	fibonacci "github.com/dmicheneau/golearn/fibonacci"
-	morpion "github.com/dmicheneau/golearn/morpion"
+	fibonacci "github.com/dmicheneau/golearn/game/fibonacci"
+	morpion "github.com/dmicheneau/golearn/game/morpion"
 )
 
 var (
