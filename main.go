@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/charmbracelet/lipgloss"
 	fibonacci "github.com/dmicheneau/golearn/fibonacci"
