@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/charmbracelet/lipgloss"
+	banque "github.com/dmicheneau/golearn/game/banque"
 	fibonacci "github.com/dmicheneau/golearn/game/fibonacci"
 	geometry "github.com/dmicheneau/golearn/game/geometry"
 	morpion "github.com/dmicheneau/golearn/game/morpion"
@@ -49,7 +50,8 @@ func main() {
 		fmt.Println(style.Render("2 - play fibonacci"))
 		fmt.Println(style.Render("3 - play romans"))
 		fmt.Println(style.Render("4 - play geometry"))
-		fmt.Println(style.Render("5 - quit"))
+		fmt.Println(style.Render("5 - play banque"))
+		fmt.Println(style.Render("6 - quit"))
 		fmt.Println(style.Render("what do you want to do ?"))
 
 		var reponse string
@@ -68,6 +70,9 @@ func main() {
 			log.Info().Msg("starting geometry")
 			geometry.Start()
 		case "5":
+			log.Info().Msg("starting banque")
+			banque.Start()
+		case "6":
 			log.Info().Msg("quitting")
 			os.Exit(0)
 		default:
