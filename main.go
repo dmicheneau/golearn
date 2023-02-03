@@ -10,6 +10,7 @@ import (
 	geometry "github.com/dmicheneau/golearn/game/geometry"
 	morpion "github.com/dmicheneau/golearn/game/morpion"
 	romans "github.com/dmicheneau/golearn/game/romans"
+	testurl "github.com/dmicheneau/golearn/game/testurl"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 )
@@ -51,7 +52,8 @@ func main() {
 		fmt.Println(style.Render("3 - play romans"))
 		fmt.Println(style.Render("4 - play geometry"))
 		fmt.Println(style.Render("5 - play banque"))
-		fmt.Println(style.Render("6 - quit"))
+		fmt.Println(style.Render("6 - play testurl"))
+		fmt.Println(style.Render("7 - quit"))
 		fmt.Println(style.Render("what do you want to do ?"))
 
 		var reponse string
@@ -73,6 +75,9 @@ func main() {
 			log.Info().Msg("starting banque")
 			banque.Start()
 		case "6":
+			log.Info().Msg("starting testurl")
+			testurl.Start()
+		case "7":
 			log.Info().Msg("quitting")
 			os.Exit(0)
 		default:
